@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Factory Framework - Knowledge Alchemy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1200px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease infinite;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .hero .description {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.5);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .brain-section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .brain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .brain-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brain-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .brain-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .brain-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #4ecdc4;
+            font-weight: 700;
+        }
+
+        .brain-card .role {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .brain-card .description {
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 2rem;
+            opacity: 0.8;
+        }
+
+        .features-list li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: #ff6b6b;
+            font-size: 1.2rem;
+        }
+
+        .chaos-score {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ff9f43);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+
+        .stats-section {
+            padding: 5rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #4ecdc4;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
+        .floating-element:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 2s; }
+        .floating-element:nth-child(4) { bottom: 10%; right: 20%; animation-delay: 3s; }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .demo-section {
+            padding: 5rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .demo-button {
+            background: linear-gradient(45deg, #45b7d1, #96ceb4);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem;
+            box-shadow: 0 10px 30px rgba(69, 183, 209, 0.3);
+        }
+
+        .demo-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(69, 183, 209, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .brain-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .brain-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="floating-elements">
+            <div class="floating-element">🧠</div>
+            <div class="floating-element">⚡</div>
+            <div class="floating-element">🚀</div>
+            <div class="floating-element">🔥</div>
+        </div>
+        
+        <div class="hero-content">
+            <h1>AI Factory</h1>
+            <div class="subtitle">Left-Brain, Middle-Brain, Right-Brain Knowledge Alchemy</div>
+            <p class="description">
+                A frictionless, high-velocity system where AI generates, orchestrates, and pushes knowledge artifacts with near-autonomy. 
+                Human oversight is minimal but surgical—like an editor-in-chief who only steps in to bless, ban, or boost.
+            </p>
+            <button class="cta-button" onclick="scrollToSection('brain-section')">
+                Explore the Framework
+            </button>
+        </div>
+    </section>
+
+    <section class="brain-section" id="brain-section">
+        <h2 class="section-title">The Three-Brain System</h2>
+        <p class="section-subtitle">From chaotic creation to autonomous distribution</p>
+        
+        <div class="brain-grid">
+            <div class="brain-card">
+                <h3>🌐 Left Brain: Generative Chaos</h3>
+                <div class="role">AI as the Mad Librarian + Artist-in-Residence</div>
+                <p class="description">
+                    Transforms enterprise data into multi-format "knowledge sparks" ready for remixing. 
+                    From meeting insights to viral memes, all with a built-in chaos score.
+                </p>
+                <div class="chaos-score">🌋 Chaos Score: 1-10</div>
+                <ul class="features-list">
+                    <li>Auto-extracts punchy quotes from meetings</li>
+                    <li>Generates 300-word explainers from data clusters</li>
+                    <li>Creates lightweight apps from processes</li>
+                    <li>Turns policies into viral-style media</li>
+                    <li>Builds self-documenting workflows</li>
+                </ul>
+            </div>
+
+            <div class="brain-card">
+                <h3>🔄 Middle Brain: Orchestration</h3>
+                <div class="role">AI as the Curator, Connector, and Chaos Tamer</div>
+                <p class="description">
+                    The invisible hand that weaves knowledge graphs, predicts backlash, and maintains the delicate balance 
+                    between chaos and order through intelligent curation.
+                </p>
+                <ul class="features-list">
+                    <li>Dynamic tagging with "Vibe" and "Half-Life"</li>
+                    <li>Knowledge graph weaving and linking</li>
+                    <li>Auto-premortems for content risks</li>
+                    <li>Three-lever control system</li>
+                    <li>Context-aware content optimization</li>
+                </ul>
+            </div>
+
+            <div class="brain-card">
+                <h3>🚀 Right Brain: Autonomous Distribution</h3>
+                <div class="role">AI as the Hype Man + Silent Assassin</div>
+                <p class="description">
+                    Platform-aware, permission-gated, tone-matched distribution that pushes content where it needs to go—
+                    with human escape hatches for every action.
+                </p>
+                <ul class="features-list">
+                    <li>Smart platform-specific distribution</li>
+                    <li>Automatic tone matching per channel</li>
+                    <li>Shadow feed logging for transparency</li>
+                    <li>One-click veto system</li>
+                    <li>SME whitelisting for compliance</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <h2 class="section-title">Why This Works</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">⚡</div>
+                <div class="stat-label">Speed</div>
+                <p>Content goes from brain → world in minutes, not weeks</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">🎯</div>
+                <div class="stat-label">Context-Aware</div>
+                <p>AI tailors tone/format to platform norms automatically</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">🔄</div>
+                <div class="stat-label">Self-Correcting</div>
+                <p>The more humans veto, the smarter the filters get</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">🎮</div>
+                <div class="stat-label">Human Control</div>
+                <p>Nudges over micromanagement, panic buttons when needed</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo-section">
+        <h2 class="section-title">Ready to Launch?</h2>
+        <p class="section-subtitle">
+            "A self-running content engine where AI dreams, organizes, and broadcasts—while humans steer with nudges, not micromanagement."
+        </p>
+        <button class="demo-button" onclick="showPilotIdea()">
+            Start Your Pilot
+        </button>
+        <button class="demo-button" onclick="showRisks()">
+            View Risk Mitigation
+        </button>
+        <button class="demo-button" onclick="showSpecs()">
+            Technical Specs
+        </button>
+    </section>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        function showPilotIdea() {
+            alert('💡 Pilot Idea:\n\nLaunch in a skunkworks team with a "Chaos Budget" (e.g., AI can auto-publish 3x/week unless stopped). Watch what thrives.\n\nStart small, measure impact, scale what works!');
+        }
+
+        function showRisks() {
+            alert('⚠️ Risk Mitigation:\n\n• Brand Cannibalization → Tone locks for external channels\n• Echo Chambers → Force contrarian feeds\n• Compliance Roulette → Nuclear keywords trigger auto-hold\n\nSafety first, innovation second!');
+        }
+
+        function showSpecs() {
+            alert('🔧 Technical Implementation:\n\n• Human-in-the-Loop: 1-click veto system\n• Ambient Approval: Watch for emoji reactions\n• Shadow Feed: Complete action logging\n• Three-Lever Control: More/Less/WTF controls\n\nBuilt for humans, powered by AI.');
+        }
+
+        // Add some dynamic background animation
+        document.addEventListener('mousemove', (e) => {
+            const elements = document.querySelectorAll('.floating-element');
+            elements.forEach((element, index) => {
+                const speed = (index + 1) * 0.0002;
+                const x = e.clientX * speed;
+                const y = e.clientY * speed;
+                element.style.transform = `translateX(${x}px) translateY(${y}px)`;
+            });
+        });
+
+        // Smooth scroll behavior for the entire page
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
