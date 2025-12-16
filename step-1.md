@@ -1,3 +1,3 @@
-# Expand the 'Usage' section to replace the placeholder '[describe main functionality here]' with concrete examples, detailing content generation, organization, and broadcasting features. Include common use cases and configuration options.
+# Draft an 'Introduction' section detailing AlchemyOS's purpose, key features, and high-level architecture.
 
-This step implements: Expand the 'Usage' section to replace the placeholder '[describe main functionality here]' with concrete examples, detailing content generation, organization, and broadcasting features. Include common use cases and configuration options.
+This step implements: Draft an 'Introduction' section detailing AlchemyOS's purpose, key features, and high-level architecture.
