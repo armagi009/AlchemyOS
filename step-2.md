@@ -1,3 +1,3 @@
-# Introduce a new 'Features' section to clearly list and briefly describe the key capabilities of AlchemyOS. Augment the 'Installation' section with explicit software prerequisites (e.g., Node.js version, specific libraries) and detailed setup instructions.
+# Develop a comprehensive 'Installation' section, including prerequisites, build instructions (if applicable), and setup steps for various environments or hardware.
 
-This step implements: Introduce a new 'Features' section to clearly list and briefly describe the key capabilities of AlchemyOS. Augment the 'Installation' section with explicit software prerequisites (e.g., Node.js version, specific libraries) and detailed setup instructions.
+This step implements: Develop a comprehensive 'Installation' section, including prerequisites, build instructions (if applicable), and setup steps for various environments or hardware.
